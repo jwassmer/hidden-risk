@@ -86,7 +86,7 @@ def interaction_betweenness_centrality(
 
 def _generate_graph_hash(graph, weight, cutoff, normalized, fit):
     if graph.is_multigraph():
-        hash_graph = ox.get_digraph(graph)
+        hash_graph = ox.convert.to_digraph(graph)
         hash = f"multigraph_{weight}_{cutoff}_{normalized}_{fit}_"
     elif nx.is_directed(graph):
         hash_graph = graph

@@ -124,7 +124,7 @@ import os
 
 def reroute_overloaded_roads(G, gamma, cache=True):
     if G.is_multigraph():
-        hash_graph = ox.get_digraph(G)
+        hash_graph = ox.convert.to_digraph(G)
         hash_val = f"multigraph_"
     elif nx.is_directed(G):
         hash_graph = G

@@ -247,7 +247,7 @@ def water_depth(region, flood_raster, polygon=None):
 
 def _generate_graph_hash(graph):
     if graph.is_multigraph():
-        hash_graph = ox.get_digraph(graph)
+        hash_graph = ox.convert.to_digraph(graph)
         hash = f"multigraph_"
     else:
         hash_graph = graph
