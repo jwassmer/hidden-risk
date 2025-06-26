@@ -1,24 +1,24 @@
-name: 2307_roads
+name: osm312
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - python=3.11.*
-  - numpy=1.26.*
-  - pandas
-  - scipy
-  - pytest
-  - matplotlib
-  - openpyxl
-  - rasterio=1.3.*
-  - geopandas=0.14.*
-  - xarray=2023.7.*
-  - rioxarray=0.14.*
-  - dask=2023.7.*
-  - netCDF4
-  - flox
-  - xlsxwriter
-  - tqdm
-  - pip
-  - pip:
-    - graphviz
-    - sparse
+  - python=3.12
+  - pyrosm
+  - pandana
+  - ipykernel
+  - osmnx
+  - rioxarray
+  - multiprocess
+  - cartopy
+  - svgpathtools
+  - svgpath2mpl
+  - conda
+  - osmium-tool
+  - contextily
+  - libgfortran5
+  - numpy=1.26
+  - gdal
+  - proj
+  - pyogrio
+prefix: /Users/jonas/miniconda3/envs/osm312
