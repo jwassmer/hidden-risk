@@ -108,9 +108,10 @@ norm = mpl.colors.LogNorm(vmin=1e-2, vmax=vmax)
 agg_gdf.set_crs("EPSG:4326").plot(
     column=plt_key, linewidth=0.3, cmap=cmap, norm=norm, ax=ax
 )
-catchment_gdf.to_crs("EPSG:4326").plot(
-    ax=ax, color="none", edgecolor="black", linewidth=1
-)
+
+
+catchment_gdf = catchment_gdf.to_crs("EPSG:4326")
+catchment_gdf.plot(ax=ax, color="none", edgecolor="black", linewidth=1)
 
 for catchment, raster in max_raster_dict.items():
     print(catchment)
@@ -145,6 +146,77 @@ for catchment, raster in max_raster_dict.items():
         norm=norm,
         rasterized=True,
     )
+
+
+for idx, row in catchment_gdf.iterrows():
+    centroid = row.geometry.centroid
+    name = row["name"]
+    if "_" in name:
+        name = " ".join(name.split("_")[::-1])
+    name = " ".join(word.capitalize() for word in name.split())
+    print(name)
+    c = "darkgrey"
+    if name == "Upper Rhine":
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x + 1.9, centroid.y + 0.5),
+            ha="right",
+            zorder=5,
+            color=c,
+        )
+    elif name == "Lower Rhine":
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x + 0.1, centroid.y - 0.05),
+            ha="center",
+            va="top",
+            zorder=5,
+            color=c,
+        )
+    elif name == "Lower Elbe":
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x + 0.85, centroid.y - 0.2),
+            ha="center",
+            va="top",
+            zorder=5,
+            color=c,
+        )
+    elif name == "Upper Elbe":
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x, centroid.y - 0.2),
+            ha="center",
+            zorder=5,
+            color=c,
+        )
+    elif name == "Donau":
+        ax.annotate(
+            text=rf"\textbf{{Danube}}",
+            xy=(centroid.x, centroid.y),
+            ha="center",
+            zorder=5,
+            color=c,
+        )
+    elif name == "Weser":
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x, centroid.y - 0.2),
+            ha="center",
+            zorder=5,
+            color=c,
+        )
+
+    else:
+        ax.annotate(
+            text=rf"\textbf{{{name}}}",
+            xy=(centroid.x, centroid.y),
+            ha="center",
+            zorder=5,
+            color=c,
+        )
+
+    ##
 
 
 for i, geom in enumerate(tail.geometry.centroid):
